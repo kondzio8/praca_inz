@@ -1,0 +1,9 @@
+{% extends 'budzet/base.html' %}
+
+{% block title %}Strona Główna{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Witamy w aplikacji Budżet Domowy!</h1>
+    <p>W tej aplikacji możesz dodawać swoje transakcje, kategoryzować wydatki i śledzić budżet.</p>
+    <a href="{% url 'dodaj_transakcje' %}" class="btn btn-primary mt-3">Dodaj Nową Transakcję</a>
+{% endblock %}

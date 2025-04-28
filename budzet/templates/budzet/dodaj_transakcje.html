@@ -1,0 +1,26 @@
+{% extends 'budzet/base.html' %}
+
+{% block title %}Dodaj Transakcję{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Dodaj Nową Transakcję</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.kwota.label_tag }}
+            {{ form.kwota }}
+        </div>
+        <div class="form-group">
+            {{ form.kategoria.label_tag }}
+            {{ form.kategoria }}
+        </div>
+        <div class="form-group">
+            {{ form.opis.label_tag }}
+            {{ form.opis }}
+        </div>
+
+        <button type="submit" class="btn btn-success">Zapisz</button>
+        <a href="{% url 'home' %}" class="btn btn-secondary ml-2">Anuluj</a>
+    </form>
+{% endblock %}

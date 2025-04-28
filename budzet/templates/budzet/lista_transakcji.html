@@ -1,0 +1,34 @@
+{% extends 'budzet/base.html' %}
+
+{% block title %}Lista Transakcji{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Twoje Transakcje</h1>
+
+    {% if transakcje %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Kwota</th>
+                    <th>Kategoria</th>
+                    <th>Opis</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transakcja in transakcje %}
+                    <tr>
+                        <td>{{ transakcja.data|date:"d.m.Y" }}</td>
+                        <td>{{ transakcja.kwota }} zł</td>
+                        <td>{{ transakcja.kategoria }}</td>
+                        <td>{{ transakcja.opis }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Brak dodanych transakcji.</p>
+    {% endif %}
+
+    <a href="{% url 'dodaj_transakcje' %}" class="btn btn-primary mt-3">Dodaj Nową Transakcję</a>
+{% endblock %}

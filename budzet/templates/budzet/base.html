@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Budżet Domowy{% endblock %}</title>
+
+    <!-- CSS Bootstrap (sam CSS, bez JS) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    {% block extra_css %}
+    <!-- Dodatkowy CSS -->
+    {% endblock %}
+</head>
+<body>
+    <!-- Pasek nawigacyjny -->
+    <nav class="navbar navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">Budżet Domowy</a>
+            <div>
+                <a class="btn btn-outline-primary mr-2" href="{% url 'dodaj_transakcje' %}">Dodaj Transakcję</a>
+                <a class="btn btn-outline-secondary" href="{% url 'lista_transakcji' %}">Lista Transakcji</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Główna zawartość -->
+    <div class="container mt-4">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- Stopka -->
+    <footer class="mt-5 py-3 bg-light">
+        <div class="container text-center">
+            <small>&copy; 2025 Budżet Domowy. Wszelkie prawa zastrzeżone.</small>
+        </div>
+    </footer>
+
+    {% block extra_js %}
+    {% endblock %}
+</body>
+</html>
