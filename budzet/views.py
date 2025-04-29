@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from .forms import TransakcjaForm
-from .models import Transakcja, Kategoria 
+from .forms import TransakcjaForm, RejestracjaForm
+from .models import Transakcja 
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login
 
 def home(request):
     return render(request, 'budzet/home.html')
 
+@login_required(login_url='/login/')
 def dodaj_transakcje(request):
     if request.method == 'POST':
         form = TransakcjaForm(request.POST)
@@ -23,6 +24,13 @@ def lista_transakcji(request):
     transakcje = Transakcja.objects.all()  # Pobieramy wszystkie transakcje
     return render(request, 'budzet/lista_transakcji.html', {'transakcje': transakcje})
 
-@login_required(login_url='/login/')
-def dodaj_transakcje(request):
-    ...
+def rejestracja(request):
+    if request.method == 'POST':
+        form = RejestracjaForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)  # automatyczne logowanie po rejestracji
+            return redirect('home')
+    else:
+        form = RejestracjaForm()
+    return render(request, 'budzet/rejestracja.html', {'form': form})

@@ -4,7 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Budżet Domowy{% endblock %}</title>
-
+    {% if user.is_authenticated %}
+    <p>Zalogowany jako {{ user.username }} |   
+        <form method="post" action="{% url 'logout' %}" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-link">Wyloguj się</button>
+    </form>
+    {% else %}
+    <a href="{% url 'login' %}">Zaloguj się</a>
+    {% endif %}
     <!-- CSS Bootstrap (sam CSS, bez JS) -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     
@@ -20,6 +28,7 @@
             <div>
                 <a class="btn btn-outline-primary mr-2" href="{% url 'dodaj_transakcje' %}">Dodaj Transakcję</a>
                 <a class="btn btn-outline-secondary" href="{% url 'lista_transakcji' %}">Lista Transakcji</a>
+                <a class="btn btn-outline-success" href="{% url 'rejestracja' %}">Rejestracja</a>
             </div>
         </div>
     </nav>
