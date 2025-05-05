@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import TransakcjaForm, RejestracjaForm
 from .models import Transakcja 
 from django.contrib.auth.decorators import login_required
@@ -20,8 +20,9 @@ def dodaj_transakcje(request):
         form = TransakcjaForm()
     return render(request, 'budzet/dodaj_transakcje.html', {'form': form})
 
+@login_required(login_url='/login/')
 def lista_transakcji(request):
-    transakcje = Transakcja.objects.all()  # Pobieramy wszystkie transakcje
+    transakcje = Transakcja.objects.filter(uzytkownik=request.user)  # pobieramy transakcje użytkownika
     return render(request, 'budzet/lista_transakcji.html', {'transakcje': transakcje})
 
 def rejestracja(request):
@@ -34,3 +35,4 @@ def rejestracja(request):
     else:
         form = RejestracjaForm()
     return render(request, 'budzet/rejestracja.html', {'form': form})
+
