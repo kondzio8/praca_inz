@@ -80,7 +80,7 @@ DATABASES = {
         'NAME': 'postgres',  # Zmień na nazwę swojej bazy danych PostgreSQL
         'USER': 'postgres',  # Nazwa użytkownika PostgreSQL
         'PASSWORD': 'admin',  # Hasło użytkownika
-        'HOST': 'localhost',  # Możesz zmienić na adres IP serwera, jeśli nie lokalnie
+        'HOST': 'db',  # Docker
         'PORT': '5432',  # Domyślny port PostgreSQL
     }
 }
